@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+	<meta name="format-datection" content="telephone=no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, target-densitydpi=device-dpi" />
+	<title>神奈川古民家めぐり</title>
+	
+	<link rel="stylesheet" href="lib/jquery/jquery.mobile-1.4.2.min.css" />
+	<script type="text/javascript" charset="utf-8" src="lib/jquery/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript" charset="utf-8" src="lib/jquery/jquery.mobile-1.4.2.min.js" ></script>
+    	<script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript">
+		var map;
+		document.addEventListener("deviceready", function() {
+
+			var KANAGAWA = new plugin.google.maps.LatLng(35.487664, 139.358720);
+
+			var button = document.getElementById("button");
+			button.addEventListener("click", onBtnClicked, false);
+			var div = document.getElementById("map_canvas");
+			map = plugin.google.maps.Map.getMap(div,{'controls': { 'myLocationButton': true },
+								'camera': {'latLng': KANAGAWA, 'zoom': 10}});
+			map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+		}, false);
+		function onMapReady(map) {
+			var IZUMI = new plugin.google.maps.LatLng(35.390914, 139.486422);
+			map.addMarker({ 'position': IZUMI, 'title': "天王森泉公園いずみの館" },
+			function(marker) {
+				marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
+					marker.showInfoWindow();
+				});
+				marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function() {
+					$(document).ready(function() {
+						$('#kominka-title').text(function (i,old) {
+							return "天王森泉公園いずみの館";
+						});
+						$('#kominka-description').text(function(i,old) {
+							description = ["今はもう見られなくなったガラスがまだ使われています。",
+									"このガラスはまっすぐじゃない。",
+									"だから、ガラスに映った電線が曲がって見えるよ。"].join("\n");
+							return description
+						});
+					});
+				});
+			});
+			
+			var SESERAGI = new plugin.google.maps.LatLng(35.538127, 139.592813);
+			map.addMarker({ 'position': SESERAGI, 'title': "せせらぎ公園古民家" },
+			function(marker) {
+				marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
+					marker.showInfoWindow();
+				});
+				marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function() {
+					$(document).ready(function() {
+						$('#kominka-title').text(function (i,old) {
+							return "せせらぎ公園古民家";
+						});
+						$('#kominka-description').text(function(i,old) {
+							description = ["せせらぎのある公園を進むと、シンプルな農家の間取りを持つ古民家が見えてきます。",
+									"土間、広間、座敷に納戸という広間型三間取りと呼ばれるそうです。",
+									"土間と広間の間には横浜の民家特有と言われるタキギヨケと呼ばれる板を見ることができます。"].join("\n");
+							return description
+						});
+					});
+				});
+			});
+			
+			var NAGAYAMON = new plugin.google.maps.LatLng(35.456229, 139.503639);
+			map.addMarker({ 'position': NAGAYAMON, 'title': "長屋門公園古民家" });
+			
+			var MAIOKA = new plugin.google.maps.LatLng(35.386629, 139.548437);
+			map.addMarker({ 'position': MAIOKA, 'title': "舞岡公園古谷戸の里" });
+			
+			var TSUZUKI = new plugin.google.maps.LatLng(35.550378, 139.581667);
+			map.addMarker({ 'position': TSUZUKI, 'title': "都築民家園" });
+			
+			var MISONO = new plugin.google.maps.LatLng(35.521827, 139.642752);
+			map.addMarker({ 'position': MISONO, 'title': "みその公園横溝屋敷" });
+			
+			var NIIHARU = new plugin.google.maps.LatLng(35.518737, 139.517821);
+			map.addMarker({ 'position': NIIHARU, 'title': "にいはる里山交流センター" });
+			
+			var NEGISHI = new plugin.google.maps.LatLng(35.418793, 139.631400);
+			map.addMarker({ 'position': NEGISHI, 'title': "根岸なつかし公園旧柳下邸" });
+				
+			var HONFUJI = new plugin.google.maps.LatLng(35.367443, 139.564621);
+			map.addMarker({ 'position': HONFUJI, 'title': "本郷ふじやま公園古民家" });
+
+		}
+		function onBtnClicked() {
+			map.showDialog();
+		}
+	
+	</script>
+    </head>
+    <body>
+	<div data-role="page" id="index" >
+		<div data-role="header" data-theme="a" ><h2>神奈川古民家めぐり</h2></div>
+		<div data-role="content" id="content" >		
+			<div id="map_canvas" style="width:100%;height:400px"></div>
+			<h1 id="kominka-title"></h1>
+			<p id="kominka-description"></p>
+			<button id="button">地図を大きくする</button>
+    		</div>
+		<div data-role="footer" data-position="fixed">
+		<h3> 神奈川の古民家をめぐろう </h3>
+		</div>
+	</div>
+	</body>
+</html>
