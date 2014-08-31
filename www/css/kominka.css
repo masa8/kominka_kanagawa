@@ -1,0 +1,7 @@
+.custom-label-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on { 
+	text-indent: -3.4em;
+}
+
+.custom-label-flipswitch.ui-flipswitch .ui-fliswitch-off {
+	text-indent: 0.5em;
+}
